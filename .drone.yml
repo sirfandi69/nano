@@ -1,10 +1,10 @@
----
 kind: pipeline
+name: default
 type: kubernetes
-name: build
+
 steps:
-- name: build
-  pull: always
-  image: images.home.mtaylor.io/events-mtaylor-io:build
-  commands:
-  - lscpu  
+  - name: build
+    image: texlive/texlive:latest
+    commands:
+      - apt-get update && apt-get -y install inkscape python3-pygments
+      - latexmk -shell-escape -pdf resume.tex
